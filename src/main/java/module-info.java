@@ -1,4 +1,4 @@
-module dsgwin.c482 {
+module dsgwin.IMS_Application {
     requires javafx.controls;
     requires javafx.fxml;
 
