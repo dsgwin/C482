@@ -3,8 +3,8 @@ module dsgwin.c482 {
     requires javafx.fxml;
 
 
-    opens dsgwin.c482 to javafx.fxml;
-    exports dsgwin.c482;
+    opens IMS_Application to javafx.fxml;
+    exports IMS_Application;
     exports controller;
     opens controller to javafx.fxml;
 }

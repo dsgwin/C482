@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPartController">
    <children>
       <VBox layoutX="-2.0" layoutY="-1.0" prefHeight="800.0" prefWidth="600.0">
          <children>
@@ -73,7 +73,7 @@
                         <Insets left="40.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="RIGHT" text="Company Name" textAlignment="RIGHT" GridPane.rowIndex="6">
+                  <Label fx:id="machineId_companyName_Toggle" alignment="CENTER" contentDisplay="RIGHT" text="Machine ID" textAlignment="RIGHT" GridPane.rowIndex="6">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
@@ -89,24 +89,30 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <RadioButton mnemonicParsing="false" text="In-House" GridPane.columnIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="Outsourced" GridPane.columnIndex="2" />
-                  <Label text="Add Part">
+                  <TextField onAction="#onActionIdTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField onAction="#onActionNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField onAction="#onActionInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField onAction="#onActionPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField onAction="#onActionMaxTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField onAction="#onAction_MachineID_CompanyNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField onAction="#onActionMinTxt" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <RadioButton mnemonicParsing="false" onAction="#inHouseSelected" selected="true" text="In-House" GridPane.columnIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="addPartToggle" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" onAction="#outsourcedSelected" text="Outsourced" toggleGroup="$addPartToggle" GridPane.columnIndex="2" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Add Part">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                      <children>
-                        <Button mnemonicParsing="false" text="Save" />
-                        <Button mnemonicParsing="false" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#onActionSaveBtn" text="Save" />
+                        <Button mnemonicParsing="false" onAction="#onActionCancelBtn" text="Cancel" />
                      </children>
                   </HBox>
                </children>
