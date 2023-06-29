@@ -11,6 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
@@ -140,12 +142,67 @@ public class MainMenuController implements Initializable {
         System.exit(0);
 
     }
+
+    @FXML
+    void onInputPartSearchTxtChanged(KeyEvent event) {
+        String partName = partSearchTxt.getText();
+        if(partName != null) {
+            partsTableView.setItems(Inventory.lookupPart(partName));
+        }
+        else{
+            partsTableView.setItems(Inventory.getAllParts());
+        }
+
+    }
+
+    @FXML
+    void onInputProductSearchTxtChanged(KeyEvent event) {
+        String productName = productSearchTxt.getText();
+        if(productName != null) {
+            productsTableView.setItems(Inventory.lookupProduct(productName));
+        }
+        else{
+            productsTableView.setItems(Inventory.getAllProducts());
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partsTableView.setItems(Inventory.getAllParts());
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         productsTableView.setItems(Inventory.getAllProducts());
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvLevelCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    public boolean search(int id){
+        for(Part p : Inventory.getAllParts()){
+            if (p.getId() == id)
+                return true;
+
+        }
+        return false;
+    }
+
+    public boolean modifyPart(int id, Part part){
+        int index = -1;
+        for(Part p : Inventory.getAllParts()){
+            index++;
+
+            if(p.getId() == id)
+            {
+                Inventory.getAllParts().set(index, part);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

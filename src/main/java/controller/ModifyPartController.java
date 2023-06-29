@@ -17,6 +17,13 @@ public class ModifyPartController {
     Stage stage;
     Parent scene;
 
+    private void returnToMainMenu(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
     @FXML
     private Label machineId_companyName_Toggle;
 
@@ -27,10 +34,14 @@ public class ModifyPartController {
     @FXML
     void onActionModifyPartCancelBtn(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        returnToMainMenu(event);
+
+    }
+
+    @FXML
+    void onActionModifyPartSaveBtn(ActionEvent event) throws IOException {
+
+        returnToMainMenu(event);
 
     }
 
@@ -64,10 +75,7 @@ public class ModifyPartController {
 
     }
 
-    @FXML
-    void onActionModifyPartSaveBtn(ActionEvent event) {
 
-    }
 
     @FXML
     void onActionModifyPart_mId_cName(ActionEvent event) {

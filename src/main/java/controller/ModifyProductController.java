@@ -17,6 +17,13 @@ public class ModifyProductController {
     Stage stage;
     Parent scene;
 
+    private void returnToMainMenu(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
     @FXML
     private TextField modifyProductIdTxt;
 
@@ -67,10 +74,7 @@ public class ModifyProductController {
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        returnToMainMenu(event);
 
     }
 
@@ -80,7 +84,9 @@ public class ModifyProductController {
     }
 
     @FXML
-    void onActionSaveBtn(ActionEvent event) {
+    void onActionSaveBtn(ActionEvent event) throws IOException {
+
+        returnToMainMenu(event);
 
     }
 

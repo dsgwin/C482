@@ -17,6 +17,12 @@ public class AddProductController {
     Stage stage;
     Parent scene;
 
+    private void returnToMainMenu(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
     @FXML
     private TextField addProductIdTxt;
 
@@ -60,17 +66,16 @@ public class AddProductController {
     private TableColumn<?, ?> addParts_PartPriceCol;
 
     @FXML
-    void onActionAddPartBtn(ActionEvent event) {
+    void onActionAddPartBtn(ActionEvent event) throws IOException {
+
+        returnToMainMenu(event);
 
     }
 
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        returnToMainMenu(event);
 
     }
 

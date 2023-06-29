@@ -89,18 +89,18 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField onAction="#onActionIdTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField onAction="#onActionNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField onAction="#onActionInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField onAction="#onActionPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField onAction="#onActionMaxTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField onAction="#onAction_MachineID_CompanyNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField onAction="#onActionMinTxt" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <RadioButton mnemonicParsing="false" onAction="#inHouseSelected" selected="true" text="In-House" GridPane.columnIndex="1">
+                  <TextField fx:id="partIdTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="partNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="partInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="partPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="partMaxTxt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="partMachine_CompanyTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="partMinTxt" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <RadioButton fx:id="inHouseRBtn" mnemonicParsing="false" onAction="#inHouseSelected" selected="true" text="In-House" GridPane.columnIndex="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="addPartToggle" />
                      </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" onAction="#outsourcedSelected" text="Outsourced" toggleGroup="$addPartToggle" GridPane.columnIndex="2" />
+                  <RadioButton fx:id="outsourcedRBtn" mnemonicParsing="false" onAction="#outsourcedSelected" text="Outsourced" toggleGroup="$addPartToggle" GridPane.columnIndex="2" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Add Part">
                      <font>
                         <Font name="System Bold" size="12.0" />
