@@ -20,9 +20,24 @@ public class Inventory {
         return  allParts;
     }
 
-    public static void deletePart(Part part)
+    public static boolean deletePart(Part part)
     {
         allParts.remove(part);
+        return true;
+    }
+
+    public static  Part lookupPart(int partId) {
+
+        for (Part p:allParts){
+            if (p.getId() == partId){
+                return p;
+            }
+        }
+
+        return null;
+    }
+    public static Part lookupPart(String partName) {
+        return null;
     }
 
 
@@ -38,9 +53,21 @@ public class Inventory {
         return  allProducts;
     }
 
-    public static void deleteProduct(Product product)
+    public static boolean deleteProduct(Product product)
     {
         allParts.remove(product);
+        return true;
+    }
+
+    public static Product lookupProduct(int productId) {
+        return null;
+    }
+    public static Product lookupProduct(String productName) {
+        return null;
+    }
+
+    public static void updateProduct(int index, Product newProduct){
+
     }
 
 

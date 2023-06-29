@@ -8,8 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Inventory;
+import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,31 +45,37 @@ public class MainMenuController implements Initializable {
     private Button modifyProductBtn;
 
     @FXML
-    private TableColumn<?, ?> partIdCol;
+    private TableView<Part> partsTableView;
 
     @FXML
-    private TableColumn<?, ?> partInvLevelCol;
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
-    private TableColumn<?, ?> partNameCol;
+    private TableColumn<Part, Integer> partInvLevelCol;
 
     @FXML
-    private TableColumn<?, ?> partPriceCol;
+    private TableColumn<Part, String> partNameCol;
+
+    @FXML
+    private TableColumn<Part, Double> partPriceCol;
 
     @FXML
     private TextField partSearchTxt;
 
     @FXML
-    private TableColumn<?, ?> productCostCol;
+    private TableView<Product> productsTableView;
 
     @FXML
-    private TableColumn<?, ?> productIdCol;
+    private TableColumn<Product, Double> productCostCol;
 
     @FXML
-    private TableColumn<?, ?> productInvLevelCol;
+    private TableColumn<Product, Integer> productIdCol;
 
     @FXML
-    private TableColumn<?, ?> productNameCol;
+    private TableColumn<Product, Integer> productInvLevelCol;
+
+    @FXML
+    private TableColumn<Product, String> productNameCol;
 
     @FXML
     private TextField productSearchTxt;
@@ -131,7 +142,10 @@ public class MainMenuController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        partsTableView.setItems(Inventory.getAllParts());
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+        productsTableView.setItems(Inventory.getAllProducts());
     }
 
 }
