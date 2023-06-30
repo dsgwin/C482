@@ -30,8 +30,7 @@ public class Inventory {
         return true;
     }
 
-    public static  Part lookupPart(int partId) {
-
+    public static Part lookupPart(int partId) {
 
         for (Part p:allParts){
             if (p.getId() == partId){
@@ -77,6 +76,7 @@ public class Inventory {
     }
 
     public static Product lookupProduct(int productId) {
+
         for (Product p:allProducts){
             if (p.getId() == productId){
                 return p;

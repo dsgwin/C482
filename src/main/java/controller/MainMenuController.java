@@ -147,7 +147,13 @@ public class MainMenuController implements Initializable {
     void onInputPartSearchTxtChanged(KeyEvent event) {
         String partName = partSearchTxt.getText();
         if(partName != null) {
-            partsTableView.setItems(Inventory.lookupPart(partName));
+            try{
+                int partId = Integer.parseInt(partName);
+                partsTableView.getSelectionModel().select(Inventory.lookupPart(partId));
+            }
+            catch (Exception e){
+                partsTableView.setItems(Inventory.lookupPart(partName));
+            }
         }
         else{
             partsTableView.setItems(Inventory.getAllParts());
@@ -159,7 +165,12 @@ public class MainMenuController implements Initializable {
     void onInputProductSearchTxtChanged(KeyEvent event) {
         String productName = productSearchTxt.getText();
         if(productName != null) {
-            productsTableView.setItems(Inventory.lookupProduct(productName));
+            try {
+                int productId = Integer.parseInt(productName);
+                productsTableView.getSelectionModel().select(Inventory.lookupProduct(productId));
+            } catch (Exception e) {
+                productsTableView.setItems(Inventory.lookupProduct(productName));
+            }
         }
         else{
             productsTableView.setItems(Inventory.getAllProducts());
