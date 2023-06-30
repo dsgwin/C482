@@ -160,7 +160,7 @@ public class ModifyProductController implements Initializable {
         modifyProductMaxTxt.setText(String.valueOf(product.getMax()));
         modifyProductMinTxt.setText(String.valueOf(product.getMin()));
         addPartsTableView.setItems(Inventory.getAllParts());
-        modifySelectedParts = product.getAllAssociatedParts();
+        modifySelectedParts.addAll(product.getAllAssociatedParts());
         selectedPartsTableView.setItems(modifySelectedParts);
     }
 
@@ -173,7 +173,7 @@ public class ModifyProductController implements Initializable {
         addParts_PartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         addParts_PartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        modifySelectedParts.clear();
+
         selectedParts_PartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         selectedParts_PartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedParts_PartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
