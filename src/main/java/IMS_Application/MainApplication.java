@@ -35,6 +35,11 @@ public class MainApplication extends Application {
         product1.addAssociatedPart(part2);
         Inventory.addProduct(product1);
 
+        Product product2 =new Product(2,"Tricycle", 600.00, 2, 2, 10);
+        product2.addAssociatedPart(part1);
+        product2.addAssociatedPart(part2);
+        Inventory.addProduct(product2);
+
 
         launch(args);
 

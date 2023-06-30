@@ -71,7 +71,7 @@ public class Inventory {
 
     public static boolean deleteProduct(Product product)
     {
-        allParts.remove(product);
+        allProducts.remove(product);
         return true;
     }
 
