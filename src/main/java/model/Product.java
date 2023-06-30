@@ -23,6 +23,16 @@ public class Product {
         this.max = max;
     }
 
+    public Product(ObservableList associatedParts, int id, String name, double price, int stock, int min, int max) {
+        this.associatedParts = associatedParts;
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.min = min;
+        this.max = max;
+    }
+
     public ObservableList<Part> getAssociatedParts() {
         return associatedParts;
     }

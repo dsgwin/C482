@@ -6,6 +6,9 @@ import javafx.collections.ObservableList;
 
 public class Inventory {
 
+    public static int nextPartId = 0;
+    public static int nextProductId = 0;
+
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
@@ -13,6 +16,11 @@ public class Inventory {
     private static  ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
 
     /* Begin part methods */
+    public static int getNextPartId(){
+        nextPartId++;
+        return nextPartId;
+    }
+
     public static void addPart(Part part)
     {
         allParts.add(part);
@@ -26,8 +34,13 @@ public class Inventory {
 
     public static boolean deletePart(Part part)
     {
+        try{
         allParts.remove(part);
-        return true;
+        return true;}
+        catch (Exception e){
+            System.out.println("Error: Unable to delete selected part");
+        }
+        return false;
     }
 
     public static Part lookupPart(int partId) {
@@ -58,6 +71,11 @@ public class Inventory {
 
     /* Begin product methods */
 
+    public static int getNextProductId(){
+        nextProductId++;
+        return nextProductId;
+    }
+
     public static void addProduct(Product product)
     {
         allProducts.add(product);
@@ -71,8 +89,13 @@ public class Inventory {
 
     public static boolean deleteProduct(Product product)
     {
-        allProducts.remove(product);
-        return true;
+        try{
+            allProducts.remove(product);
+            return true;}
+        catch (Exception e){
+            System.out.println("Error: Unable to delete selected product");
+        }
+        return false;
     }
 
     public static Product lookupProduct(int productId) {

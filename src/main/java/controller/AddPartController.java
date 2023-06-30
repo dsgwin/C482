@@ -5,18 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.RadioButton;
 import model.InHouse;
 import model.Inventory;
 import model.Outsourced;
 
 import java.io.IOException;
 import java.util.EventObject;
+import java.util.Optional;
 
 public class AddPartController {
 
@@ -67,37 +64,58 @@ public class AddPartController {
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
-        returnToMainMenu(event);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?\nAll values will be discarded.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            returnToMainMenu(event);
+        }
 
     }
 
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
-        int id = Integer.parseInt(partIdTxt.getText());
-        String name = partNameTxt.getText();
-        int stock = Integer.parseInt(partInvTxt.getText());
-        double price = Double.parseDouble(partPriceTxt.getText());
-        int max = Integer.parseInt(partMaxTxt.getText());
-        int min = Integer.parseInt(partMinTxt.getText());
-        int machineId = -1;
-        String companyName = null;
-        
-        if (inHouseRBtn.isSelected()){
-            machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
-        }else{
-            companyName = partMachine_CompanyTxt.getText();
+        try{
+                int id = Inventory.getNextPartId();
+                String name = partNameTxt.getText();
+                int stock = Integer.parseInt(partInvTxt.getText());
+                double price = Double.parseDouble(partPriceTxt.getText());
+                int max = Integer.parseInt(partMaxTxt.getText());
+                int min = Integer.parseInt(partMinTxt.getText());
+                int machineId = -1;
+                String companyName = null;
+
+                if (inHouseRBtn.isSelected()){
+                    machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
+                }else{
+                    companyName = partMachine_CompanyTxt.getText();
+                }
+
+                if (inHouseRBtn.isSelected()) {
+                    InHouse part = new InHouse(id, name, price, stock, min, max, machineId);
+
+                    Inventory.addPart(part);
+                }
+                else{
+                    Outsourced part = new Outsourced(id,name,price,stock,min,max,companyName);
+                    Inventory.addPart(part);
+
+            }
+            returnToMainMenu(event);
+
+        }
+        catch(NumberFormatException e){
+
+            Inventory.nextPartId--;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Adding Part");
+            alert.setContentText("Please enter valid values for each text field");
+            alert.showAndWait();
+
         }
 
-        if (inHouseRBtn.isSelected()){
-            InHouse part = new InHouse(id,name,price,stock,min,max,machineId);
-            Inventory.addPart(part);
-        }else{
-            Outsourced part = new Outsourced(id,name,price,stock,min,max,companyName);
-            Inventory.addPart(part);
-        }
 
-        returnToMainMenu(event);
 
     }
 

@@ -6,12 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -20,6 +16,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -27,24 +24,6 @@ public class MainMenuController implements Initializable {
 
     Stage stage;
     Parent scene;
-
-    @FXML
-    private Button addPartBtn;
-
-    @FXML
-    private Button addProductBtn;
-
-    @FXML
-    private Button deletePartBtn;
-
-    @FXML
-    private Button deleteProductBtn;
-
-    @FXML
-    private Button modifyPartBtn;
-
-    @FXML
-    private Button modifyProductBtn;
 
     @FXML
     private TableView<Part> partsTableView;
@@ -106,8 +85,17 @@ public class MainMenuController implements Initializable {
     void onActionDeletePart(ActionEvent event) {
 
         Part part = partsTableView.getSelectionModel().getSelectedItem();
-        Inventory.deletePart(part);
-        partsTableView.refresh();
+        String partName = part.getName();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " +partName+ " from the list?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Inventory.deletePart(part);
+            partsTableView.refresh();
+        }
+
+
 
     }
 
@@ -115,40 +103,78 @@ public class MainMenuController implements Initializable {
     void onActionDeleteProduct(ActionEvent event) {
 
         Product product = productsTableView.getSelectionModel().getSelectedItem();
-        Inventory.deleteProduct(product);
-        productsTableView.refresh();
+        String productName = product.getName();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " +productName+ " from the list?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Inventory.deleteProduct(product);
+            productsTableView.refresh();
+        }
 
     }
 
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/IMS_Application/ModifyPart.fxml"));
+        loader.load();
+
+        ModifyPartController partController = loader.getController();
+
+        partController.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/ModifyPart.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
+
+
 
     }
 
     @FXML
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
+       FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/IMS_Application/ModifyProduct.fxml"));
+        loader.load();
+
+        ModifyProductController MPCController = loader.getController();
+
+        MPCController.sendProduct(productsTableView.getSelectionModel().getSelectedItem());
+
+
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/IMS_Application/ModifyProduct.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
 
+
+
     }
+
+
 
     @FXML
     void onActionExitBtn(ActionEvent event) {
 
-        System.exit(0);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to exit the application?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
+
+
 
     }
 
     @FXML
     void onInputPartSearchTxtChanged(KeyEvent event) {
+
         String partName = partSearchTxt.getText();
         if(partName != null) {
             try{
@@ -184,6 +210,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         partsTableView.setItems(Inventory.getAllParts());
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -197,27 +224,5 @@ public class MainMenuController implements Initializable {
         productCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-    public boolean search(int id){
-        for(Part p : Inventory.getAllParts()){
-            if (p.getId() == id)
-                return true;
-
-        }
-        return false;
-    }
-
-    public boolean modifyPart(int id, Part part){
-        int index = -1;
-        for(Part p : Inventory.getAllParts()){
-            index++;
-
-            if(p.getId() == id)
-            {
-                Inventory.getAllParts().set(index, part);
-                return true;
-            }
-        }
-        return false;
-    }
 
 }
