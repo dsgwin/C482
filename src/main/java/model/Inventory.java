@@ -120,7 +120,15 @@ public class Inventory {
         return filteredProducts;
     }
 
+    public static void updatePart(int index, Part newPart){
+
+        allParts.set(index, newPart);
+
+    }
+
     public static void updateProduct(int index, Product newProduct){
+
+        allProducts.set(index, newProduct);
 
     }
 

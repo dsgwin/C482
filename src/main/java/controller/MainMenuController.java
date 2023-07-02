@@ -124,7 +124,9 @@ public class MainMenuController implements Initializable {
 
         ModifyPartController partController = loader.getController();
 
-        partController.sendPart(partsTableView.getSelectionModel().getSelectedItem());
+        int index = partsTableView.getSelectionModel().getSelectedIndex();
+
+        partController.sendPart(index, partsTableView.getSelectionModel().getSelectedItem());
 
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         Parent scene = loader.getRoot();
