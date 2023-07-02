@@ -146,7 +146,9 @@ public class MainMenuController implements Initializable {
 
         ModifyProductController MPCController = loader.getController();
 
-        MPCController.sendProduct(productsTableView.getSelectionModel().getSelectedItem());
+        int index = productsTableView.getSelectionModel().getSelectedIndex();
+
+        MPCController.sendProduct(index, productsTableView.getSelectionModel().getSelectedItem());
 
 
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();

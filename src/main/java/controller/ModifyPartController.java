@@ -7,10 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.InHouse;
-import model.Inventory;
-import model.Outsourced;
-import model.Part;
+import model.*;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -105,6 +102,20 @@ public class ModifyPartController {
 
                 Inventory.updatePart(index, updatedPart);
 
+
+
+                for(Product p : Inventory.getAllProducts()){
+
+                    for(Part part : p.getAllAssociatedParts()){
+
+                        if(updatedPart.getId() == part.getId()){
+
+                            int index = p.getAssociatePartIndex(part);
+                            p.updateAssociatedPart(index, updatedPart);
+                        }
+                    }
+                }
+
             }
             returnToMainMenu(event);
 
@@ -137,7 +148,6 @@ public class ModifyPartController {
 
     public void sendPart(int partIndex, Part part){
         setIndex(partIndex);
-        System.out.println(index);
         partIdTxt.setText(String.valueOf(part.getId()));
         partNameTxt.setText(part.getName());
         partPriceTxt.setText(String.valueOf(part.getPrice()));

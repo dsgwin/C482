@@ -12,9 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import model.Inventory;
-import model.Part;
-import model.Product;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +23,8 @@ public class ModifyProductController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    private int index;
 
     private ObservableList<Part> modifySelectedParts = FXCollections.observableArrayList();
 
@@ -117,21 +117,43 @@ public class ModifyProductController implements Initializable {
     void onActionRemovePartBtn(ActionEvent event) {
 
         Part selectedPart = selectedPartsTableView.getSelectionModel().getSelectedItem();
-        if (!(selectedPart == null)) {
             try {
-
+                modifySelectedParts.remove(selectedPart);
                 selectedPartsTableView.refresh();
 
             } catch (Exception e) {
                 System.out.println("No part selected");
             }
-        }
+
     }
 
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
-        returnToMainMenu(event);
+        try{
+            int id = Integer.parseInt(modifyProductIdTxt.getText());
+            String name = modifyProductNameTxt.getText();
+            int stock = Integer.parseInt(modifyProductInvTxt.getText());
+            double price = Double.parseDouble(modifyProductPriceTxt.getText());
+            int max = Integer.parseInt(modifyProductMaxTxt.getText());
+            int min = Integer.parseInt(modifyProductMinTxt.getText());
+            ObservableList associatedParts = modifySelectedParts;
+
+            Product newProduct = new Product(associatedParts, id, name, price, stock, min, max);
+
+            Inventory.updateProduct(index, newProduct);
+
+            returnToMainMenu(event);
+
+        }
+        catch(NumberFormatException e){
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Adding Part");
+            alert.setContentText("Please enter valid values for each text field");
+            alert.showAndWait();
+
+        }
 
     }
 
@@ -151,7 +173,9 @@ public class ModifyProductController implements Initializable {
         }
     }
 
-    public void sendProduct(Product product) {
+    public void sendProduct(int productIndex, Product product) {
+
+        setIndex(productIndex);
 
         modifyProductIdTxt.setText(String.valueOf(product.getId()));
         modifyProductNameTxt.setText(product.getName());
@@ -178,6 +202,11 @@ public class ModifyProductController implements Initializable {
         selectedParts_PartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         selectedParts_PartInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         selectedParts_PartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+    }
+
+    private void setIndex(int productIndex){
+        index = productIndex;
 
     }
 

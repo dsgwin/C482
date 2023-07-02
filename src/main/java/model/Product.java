@@ -101,4 +101,14 @@ public class Product {
     public ObservableList<Part> getAllAssociatedParts(){
         return associatedParts;
     }
+
+    public void updateAssociatedPart(int index, Part updatedPart){
+        associatedParts.set(index, updatedPart);
+    }
+
+    public int getAssociatePartIndex(Part part){
+
+        int index = associatedParts.indexOf(part);
+        return index;
+    }
 }
