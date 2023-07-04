@@ -74,7 +74,40 @@ public class ModifyPartController {
     @FXML
     void onActionModifyPartSaveBtn(ActionEvent event) throws IOException {
 
+        String alertText = null;
+
         try{
+            try {
+                int stock = Integer.parseInt(partInvTxt.getText());
+            }
+            catch (Exception e) {
+                alertText = "Inventory Field Invalid. Must be an Integer";
+            }
+            try {
+                double price = Double.parseDouble(partPriceTxt.getText());
+            }
+            catch (Exception e) {
+
+                alertText = "Price Field Invalid. Must be a decimal format.\nex. 5.99";
+
+            }
+            try{
+                int max = Integer.parseInt(partMaxTxt.getText());
+            }
+            catch (Exception e) {
+                alertText = "Max Field Invalid. Must be an Integer";
+
+            }
+            try {
+                int min = Integer.parseInt(partMinTxt.getText());
+            }
+            catch (Exception e) {
+                alertText = "Min Field Invalid. Must be an Integer";
+            }
+
+
+
+
             int id = Integer.parseInt(partIdTxt.getText());
             String name = partNameTxt.getText();
             int stock = Integer.parseInt(partInvTxt.getText());
@@ -128,7 +161,7 @@ public class ModifyPartController {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Adding Part");
-            alert.setContentText("Please enter valid values for each text field");
+            alert.setContentText(alertText);
             alert.showAndWait();
 
         }

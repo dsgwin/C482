@@ -142,13 +142,45 @@ public class ModifyProductController implements Initializable {
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
-        try{
+        String alertText = null;
+
+        try {
+            try {
+                int stock = Integer.parseInt(modifyProductInvTxt.getText());
+            }
+            catch (Exception e) {
+                alertText = "Inventory Field Invalid. Must be an Integer";
+            }
+            try {
+            double price = Double.parseDouble(modifyProductPriceTxt.getText());
+            }
+            catch (Exception e) {
+
+                alertText = "Price Field Invalid. Must be a decimal format.\nex. 5.99";
+
+            }
+            try{
+                int max = Integer.parseInt(modifyProductMaxTxt.getText());
+            }
+            catch (Exception e) {
+                alertText = "Max Field Invalid. Must be an Integer";
+
+            }
+            try {
+                int min = Integer.parseInt(modifyProductMinTxt.getText());
+            }
+            catch (Exception e) {
+                    alertText = "Min Field Invalid. Must be an Integer";
+
+                }
+
+
             int id = Integer.parseInt(modifyProductIdTxt.getText());
-            String name = modifyProductNameTxt.getText();
             int stock = Integer.parseInt(modifyProductInvTxt.getText());
             double price = Double.parseDouble(modifyProductPriceTxt.getText());
             int max = Integer.parseInt(modifyProductMaxTxt.getText());
             int min = Integer.parseInt(modifyProductMinTxt.getText());
+            String name = modifyProductNameTxt.getText();
             ObservableList associatedParts = modifySelectedParts;
 
             if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
@@ -163,9 +195,10 @@ public class ModifyProductController implements Initializable {
         }
         catch(NumberFormatException e){
 
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Adding Part");
-            alert.setContentText("Please enter valid values for each text field");
+            alert.setTitle("Error Adding Product");
+            alert.setContentText(alertText);
             alert.showAndWait();
 
         }
