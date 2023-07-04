@@ -90,34 +90,39 @@ public class ModifyPartController {
                 companyName = partMachine_CompanyTxt.getText();
             }
 
-            if (inHouseRBtn.isSelected()) {
-                InHouse updatedPart = new InHouse(id, name, price, stock, min, max, machineId);
+            if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
 
-                Inventory.updatePart(index, updatedPart);
-            }
-            else{
-                Outsourced updatedPart = new Outsourced(id,name,price,stock,min,max,companyName);
+                if (inHouseRBtn.isSelected()) {
+                    InHouse updatedPart = new InHouse(id, name, price, stock, min, max, machineId);
 
-                Inventory.updatePart(index, updatedPart);
-
-
-
-                for(Product p : Inventory.getAllProducts()){
-
-                    for(Part part : p.getAllAssociatedParts()){
-
-                        if(updatedPart.getId() == part.getId()){
-
-                            int index = p.getAssociatePartIndex(part);
-                            p.updateAssociatedPart(index, updatedPart);
+                    Inventory.updatePart(index, updatedPart);
+                    for (Product p : Inventory.getAllProducts()) {
+                        for (Part part : p.getAllAssociatedParts()) {
+                            if (updatedPart.getId() == part.getId()) {
+                                int index = p.getAssociatePartIndex(part);
+                                p.updateAssociatedPart(index, updatedPart);
+                            }
                         }
                     }
+                    returnToMainMenu(event);
+                } else {
+                    Outsourced updatedPart = new Outsourced(id, name, price, stock, min, max, companyName);
+
+                    Inventory.updatePart(index, updatedPart);
+                    for (Product p : Inventory.getAllProducts()) {
+                        for (Part part : p.getAllAssociatedParts()) {
+                            if (updatedPart.getId() == part.getId()) {
+                                int index = p.getAssociatePartIndex(part);
+                                p.updateAssociatedPart(index, updatedPart);
+                            }
+                        }
+                    }
+                    returnToMainMenu(event);
                 }
-
             }
-            returnToMainMenu(event);
-
         }
+
+
         catch(NumberFormatException e){
 
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -134,9 +134,11 @@ public class AddProductController implements Initializable {
             int min = Integer.parseInt(addProductMinTxt.getText());
             ObservableList associatedParts = selectedParts;
 
-            Inventory.addProduct(new Product(associatedParts, id, name, price, stock, min, max));
+            if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
+                Inventory.addProduct(new Product(associatedParts, id, name, price, stock, min, max));
 
-            returnToMainMenu(event);
+                returnToMainMenu(event);
+            }
         }
         catch(NumberFormatException e){
 

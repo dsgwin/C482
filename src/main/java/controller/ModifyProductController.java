@@ -139,11 +139,14 @@ public class ModifyProductController implements Initializable {
             int min = Integer.parseInt(modifyProductMinTxt.getText());
             ObservableList associatedParts = modifySelectedParts;
 
-            Product newProduct = new Product(associatedParts, id, name, price, stock, min, max);
+            if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
 
-            Inventory.updateProduct(index, newProduct);
+                Product newProduct = new Product(associatedParts, id, name, price, stock, min, max);
 
-            returnToMainMenu(event);
+                Inventory.updateProduct(index, newProduct);
+
+                returnToMainMenu(event);
+            }
 
         }
         catch(NumberFormatException e){
