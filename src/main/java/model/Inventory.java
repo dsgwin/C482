@@ -3,6 +3,7 @@ package model;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 public class Inventory {
 
@@ -129,5 +130,30 @@ public class Inventory {
 
     }
 
+    public static boolean minMaxCheck(int min, int max){
+        boolean minMaxValid = true;
+        if(!(min <= max && max >= min)){
+            minMaxValid = false;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Min/Max Values");
+            alert.setContentText("Please enter valid values for minimum and maximum. Min should not exceed max.");
+            alert.showAndWait();;
+        }
+        return minMaxValid;
+    }
+
+    public static boolean inventoryCheck(int min, int max, int stock){
+        boolean inventoryValid = true;
+        if(!(stock >= min && stock <= max)) {
+            inventoryValid = false;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Inventory Value");
+            alert.setContentText("Stock should not be below the minimum or above the maximum values");
+            alert.showAndWait();
+
+        }
+        return inventoryValid;
+
+        }
 
 }

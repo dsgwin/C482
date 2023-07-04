@@ -92,17 +92,22 @@ public class AddPartController {
                     companyName = partMachine_CompanyTxt.getText();
                 }
 
-                if (inHouseRBtn.isSelected()) {
-                    InHouse part = new InHouse(id, name, price, stock, min, max, machineId);
+                if((Inventory.minMaxCheck(min, max) == true) && (Inventory.inventoryCheck(min, max, stock) == true)){
 
-                    Inventory.addPart(part);
+                    if (inHouseRBtn.isSelected()) {
+                        InHouse part = new InHouse(id, name, price, stock, min, max, machineId);
+
+                        Inventory.addPart(part);
+                        returnToMainMenu(event);
+                    }
+                    else {
+                        Outsourced part = new Outsourced(id, name, price, stock, min, max, companyName);
+                        Inventory.addPart(part);
+                        returnToMainMenu(event);
                 }
-                else{
-                    Outsourced part = new Outsourced(id,name,price,stock,min,max,companyName);
-                    Inventory.addPart(part);
 
             }
-            returnToMainMenu(event);
+
 
         }
         catch(NumberFormatException e){
@@ -112,6 +117,7 @@ public class AddPartController {
             alert.setTitle("Error Adding Part");
             alert.setContentText("Please enter valid values for each text field");
             alert.showAndWait();
+
 
         }
 
