@@ -15,7 +15,7 @@ public class Inventory {
     private static  ObservableList<Part> filteredParts = FXCollections.observableArrayList();
     private static  ObservableList<Product> filteredProducts = FXCollections.observableArrayList();
 
-    /* Begin part methods */
+    // Begin part methods
     public static int getNextPartId(){
         nextPartId++;
         return nextPartId;
@@ -31,9 +31,7 @@ public class Inventory {
         return  allParts;
     }
 
-
-    public static boolean deletePart(Part part)
-    {
+    public static boolean deletePart(Part part) {
         try{
         allParts.remove(part);
         return true;}
@@ -67,9 +65,14 @@ public class Inventory {
         return filteredParts;
 
     }
+    public static void updatePart(int index, Part newPart){
+
+        allParts.set(index, newPart);
+
+    }
 
 
-    /* Begin product methods */
+    // Begin product methods
 
     public static int getNextProductId(){
         nextProductId++;
@@ -118,12 +121,6 @@ public class Inventory {
             }
         }
         return filteredProducts;
-    }
-
-    public static void updatePart(int index, Part newPart){
-
-        allParts.set(index, newPart);
-
     }
 
     public static void updateProduct(int index, Product newProduct){

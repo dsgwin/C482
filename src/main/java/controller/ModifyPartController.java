@@ -56,10 +56,8 @@ public class ModifyPartController {
     @FXML
     private RadioButton outsourceRBtn;
 
-
     @FXML
     private ToggleGroup addPartToggle;
-
 
     @FXML
     void onActionModifyPartCancelBtn(ActionEvent event) throws IOException {
@@ -130,7 +128,6 @@ public class ModifyPartController {
         }
 
     }
-
 
     @FXML
     void inHouseSelected(ActionEvent event) {
