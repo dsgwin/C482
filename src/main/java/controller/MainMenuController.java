@@ -118,20 +118,32 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/IMS_Application/ModifyPart.fxml"));
-        loader.load();
+        try {
 
-        ModifyPartController partController = loader.getController();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/IMS_Application/ModifyPart.fxml"));
+            loader.load();
 
-        int index = partsTableView.getSelectionModel().getSelectedIndex();
+            ModifyPartController partController = loader.getController();
 
-        partController.sendPart(index, partsTableView.getSelectionModel().getSelectedItem());
+            int index = partsTableView.getSelectionModel().getSelectedIndex();
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            partController.sendPart(index, partsTableView.getSelectionModel().getSelectedItem());
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No part selected");
+            alert.setContentText("Please select a part from the list to modify");
+            alert.showAndWait();
+
+        }
+
+
 
 
 
@@ -140,21 +152,30 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
-       FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/IMS_Application/ModifyProduct.fxml"));
-        loader.load();
+        try {
 
-        ModifyProductController MPCController = loader.getController();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/IMS_Application/ModifyProduct.fxml"));
+            loader.load();
 
-        int index = productsTableView.getSelectionModel().getSelectedIndex();
+            ModifyProductController MPCController = loader.getController();
 
-        MPCController.sendProduct(index, productsTableView.getSelectionModel().getSelectedItem());
+            int index = productsTableView.getSelectionModel().getSelectedIndex();
+
+            MPCController.sendProduct(index, productsTableView.getSelectionModel().getSelectedItem());
 
 
-        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No product selected");
+            alert.setContentText("Please select a product from the list to modify");
+            alert.showAndWait();
+        }
 
 
 

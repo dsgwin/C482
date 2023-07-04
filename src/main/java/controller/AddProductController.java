@@ -139,6 +139,7 @@ public class AddProductController implements Initializable {
 
                 returnToMainMenu(event);
             }
+            else {Inventory.nextProductId--;}
         }
         catch(NumberFormatException e){
 

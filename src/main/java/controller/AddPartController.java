@@ -104,9 +104,10 @@ public class AddPartController {
                         Outsourced part = new Outsourced(id, name, price, stock, min, max, companyName);
                         Inventory.addPart(part);
                         returnToMainMenu(event);
-                }
+                    }
 
-            }
+                }
+                else {Inventory.nextPartId--;}
 
 
         }

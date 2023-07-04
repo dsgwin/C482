@@ -47,7 +47,7 @@
                                 <Insets left="40.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" text="Inv" textAlignment="RIGHT" GridPane.rowIndex="3">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" text="Inventory" textAlignment="RIGHT" GridPane.rowIndex="3">
                             <padding>
                                 <Insets left="5.0" />
                             </padding>
@@ -79,7 +79,7 @@
                                 <Insets left="5.0" />
                             </padding>
                         </Label>
-                        <TextField fx:id="addProductIdTxt" editable="false" opacity="0.85" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="addProductIdTxt" disable="true" editable="false" opacity="0.85" promptText="Auto Gen - Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="addProductNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="addProductInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="addProductPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />

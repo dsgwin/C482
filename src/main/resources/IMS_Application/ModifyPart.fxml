@@ -49,7 +49,7 @@
                                 <Insets left="40.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="RIGHT" text="Inv" textAlignment="RIGHT" GridPane.rowIndex="3">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" text="Inventory" textAlignment="RIGHT" GridPane.rowIndex="3">
                             <padding>
                                 <Insets left="5.0" />
                             </padding>
