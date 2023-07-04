@@ -89,7 +89,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="partIdTxt" disable="true" editable="false" opacity="0.73" promptText="Auto Gen - Disabled" text="Auto Gen - Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="partIdTxt" disable="true" editable="false" opacity="0.6" promptText="Auto Gen - Disabled" text="Auto Gen - Disabled" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>

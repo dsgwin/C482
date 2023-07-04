@@ -84,16 +84,26 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
-        Part part = partsTableView.getSelectionModel().getSelectedItem();
-        String partName = part.getName();
+        try {
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " +partName+ " from the list?");
+            Part part = partsTableView.getSelectionModel().getSelectedItem();
+            String partName = part.getName();
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            Inventory.deletePart(part);
-            partsTableView.refresh();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " + partName + " from the list?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.deletePart(part);
+                partsTableView.refresh();
+            }
         }
+        catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("No part selected");
+                alert.setContentText("Please select a part from the list to delete");
+                alert.showAndWait();
+        }
+
 
 
 
@@ -102,15 +112,23 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
 
-        Product product = productsTableView.getSelectionModel().getSelectedItem();
-        String productName = product.getName();
+        try{
+            Product product = productsTableView.getSelectionModel().getSelectedItem();
+            String productName = product.getName();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " +productName+ " from the list?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " + productName + " from the list?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-            Inventory.deleteProduct(product);
-            productsTableView.refresh();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.deleteProduct(product);
+                productsTableView.refresh();
+                }
+        }
+        catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No product selected");
+            alert.setContentText("Please select a product from the list to delete");
+            alert.showAndWait();
         }
 
     }

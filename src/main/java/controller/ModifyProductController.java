@@ -117,13 +117,25 @@ public class ModifyProductController implements Initializable {
     void onActionRemovePartBtn(ActionEvent event) {
 
         Part selectedPart = selectedPartsTableView.getSelectionModel().getSelectedItem();
-            try {
-                modifySelectedParts.remove(selectedPart);
-                selectedPartsTableView.refresh();
+            if (selectedPart != null) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to remove " + selectedPart.getName() + " from the list?");
 
-            } catch (Exception e) {
-                System.out.println("No part selected");
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.isPresent() && result.get() == ButtonType.OK) {
+                    modifySelectedParts.remove(selectedPart);
+                    selectedPartsTableView.refresh();
+                }
+                ;
+
             }
+            else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("No part selected");
+                    alert.setContentText("Please select a part from the list to remove");
+                    alert.showAndWait();
+                }
+
+
 
     }
 

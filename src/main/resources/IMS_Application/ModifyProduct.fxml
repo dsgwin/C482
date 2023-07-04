@@ -79,7 +79,7 @@
                                 <Insets left="5.0" />
                             </padding>
                         </Label>
-                        <TextField fx:id="modifyProductIdTxt" disable="true" editable="false" opacity="0.55" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="modifyProductIdTxt" disable="true" editable="false" opacity="0.6" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="modifyProductNameTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="modifyProductInvTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="modifyProductPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
