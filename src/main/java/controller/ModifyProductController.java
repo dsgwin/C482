@@ -145,34 +145,8 @@ public class ModifyProductController implements Initializable {
         String alertText = null;
 
         try {
-            try {
-                int stock = Integer.parseInt(modifyProductInvTxt.getText());
-            }
-            catch (Exception e) {
-                alertText = "Inventory Field Invalid. Must be an Integer";
-            }
-            try {
-            double price = Double.parseDouble(modifyProductPriceTxt.getText());
-            }
-            catch (Exception e) {
-
-                alertText = "Price Field Invalid. Must be a decimal format.\nex. 5.99";
-
-            }
-            try{
-                int max = Integer.parseInt(modifyProductMaxTxt.getText());
-            }
-            catch (Exception e) {
-                alertText = "Max Field Invalid. Must be an Integer";
-
-            }
-            try {
-                int min = Integer.parseInt(modifyProductMinTxt.getText());
-            }
-            catch (Exception e) {
-                    alertText = "Min Field Invalid. Must be an Integer";
-
-                }
+            alertText = Inventory.formInputCheck(modifyProductInvTxt.getText(),modifyProductPriceTxt.getText(),
+                    modifyProductMinTxt.getText(),modifyProductMaxTxt.getText());
 
 
             int id = Integer.parseInt(modifyProductIdTxt.getText());

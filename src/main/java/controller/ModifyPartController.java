@@ -74,39 +74,13 @@ public class ModifyPartController {
     @FXML
     void onActionModifyPartSaveBtn(ActionEvent event) throws IOException {
 
+        // Alert Text currently does not display text when an error on MachineID takes place. This could
+
         String alertText = null;
 
         try{
-            try {
-                int stock = Integer.parseInt(partInvTxt.getText());
-            }
-            catch (Exception e) {
-                alertText = "Inventory Field Invalid. Must be an Integer";
-            }
-            try {
-                double price = Double.parseDouble(partPriceTxt.getText());
-            }
-            catch (Exception e) {
-
-                alertText = "Price Field Invalid. Must be a decimal format.\nex. 5.99";
-
-            }
-            try{
-                int max = Integer.parseInt(partMaxTxt.getText());
-            }
-            catch (Exception e) {
-                alertText = "Max Field Invalid. Must be an Integer";
-
-            }
-            try {
-                int min = Integer.parseInt(partMinTxt.getText());
-            }
-            catch (Exception e) {
-                alertText = "Min Field Invalid. Must be an Integer";
-            }
-
-
-
+            alertText = Inventory.formInputCheck(partInvTxt.getText(),partPriceTxt.getText(),
+                    partMinTxt.getText(),partMaxTxt.getText());
 
             int id = Integer.parseInt(partIdTxt.getText());
             String name = partNameTxt.getText();
@@ -117,10 +91,22 @@ public class ModifyPartController {
             int machineId = -1;
             String companyName = null;
 
-            if (inHouseRBtn.isSelected()){
-                machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
-            }else{
-                companyName = partMachine_CompanyTxt.getText();
+
+
+            try{
+                if (inHouseRBtn.isSelected()){
+                    machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
+
+                }else{
+                    companyName = partMachine_CompanyTxt.getText();
+                }
+            }
+            catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Adding Part");
+                alert.setContentText("MachineID Invalid. Must be an Integer");
+                alert.showAndWait();
+
             }
 
             if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {

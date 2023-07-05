@@ -3,10 +3,7 @@ package model;
 * Supplied class Part.java 
  */
 
-/**
- *
- * @author Duncan Gwin
- */
+
 public abstract class Part {
     private int id;
     private String name;

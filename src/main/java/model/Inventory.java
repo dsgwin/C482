@@ -5,6 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
+
+/**
+ * The Inventory class contains static objects and functions that will be used to display and manipulate inventory information to the main screen.
+ */
+
 public class Inventory {
 
     public static int nextPartId = 0;
@@ -129,7 +140,7 @@ public class Inventory {
         allProducts.set(index, newProduct);
 
     }
-
+    // Added minMaxCheck to prevent logical errors when entering a larger minimum value than maximum.
     public static boolean minMaxCheck(int min, int max){
         boolean minMaxValid = true;
         if(!(min <= max && max >= min)){
@@ -142,6 +153,9 @@ public class Inventory {
         return minMaxValid;
     }
 
+    /* Added inventoryCheck to prevent logical errors when entering a larger inventory value than maximum
+    or a smaller inventory value than minimum.
+     */
     public static boolean inventoryCheck(int min, int max, int stock){
         boolean inventoryValid = true;
         if(!(stock >= min && stock <= max)) {
@@ -155,5 +169,41 @@ public class Inventory {
         return inventoryValid;
 
         }
+
+    public static String formInputCheck(String inventory, String price, String min, String max){
+        String alertText = null;
+
+        try {
+            int stock = Integer.parseInt(inventory);
+        }
+        catch (Exception e) {
+            alertText = "Inventory Field Invalid. Must be an Integer";
+        }
+        try {
+            double priceCheck = Double.parseDouble(price);
+        }
+        catch (Exception e) {
+
+            alertText = "Price Field Invalid. Must be a decimal format.\nex. 5.99";
+
+        }
+        try{
+            int maxCheck = Integer.parseInt(max);
+        }
+        catch (Exception e) {
+            alertText = "Max Field Invalid. Must be an Integer";
+
+        }
+        try {
+            int minCheck = Integer.parseInt(min);
+        }
+        catch (Exception e) {
+            alertText = "Min Field Invalid. Must be an Integer";
+
+        }
+
+
+        return alertText;
+    }
 
 }

@@ -76,7 +76,12 @@ public class AddPartController {
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
+        String alertText = null;
+
         try{
+                alertText = Inventory.formInputCheck(partInvTxt.getText(),partPriceTxt.getText(),
+                        partMinTxt.getText(),partMaxTxt.getText());
+
                 int id = Inventory.getNextPartId();
                 String name = partNameTxt.getText();
                 int stock = Integer.parseInt(partInvTxt.getText());
@@ -86,10 +91,20 @@ public class AddPartController {
                 int machineId = -1;
                 String companyName = null;
 
-                if (inHouseRBtn.isSelected()){
-                    machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
-                }else{
-                    companyName = partMachine_CompanyTxt.getText();
+                try{
+                    if (inHouseRBtn.isSelected()){
+                        machineId = Integer.parseInt(partMachine_CompanyTxt.getText());
+
+                    }else{
+                        companyName = partMachine_CompanyTxt.getText();
+                    }
+                }
+                catch (Exception e){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Adding Part");
+                    alert.setContentText("MachineID Invalid. Must be an Integer");
+                    alert.showAndWait();
+
                 }
 
                 if((Inventory.minMaxCheck(min, max) == true) && (Inventory.inventoryCheck(min, max, stock) == true)){
@@ -116,7 +131,7 @@ public class AddPartController {
             Inventory.nextPartId--;
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Adding Part");
-            alert.setContentText("Please enter valid values for each text field");
+            alert.setContentText(alertText);
             alert.showAndWait();
 
 

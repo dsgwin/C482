@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 public class Outsourced extends Part{
 
     public String companyName;

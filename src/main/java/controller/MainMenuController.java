@@ -19,7 +19,12 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 public class MainMenuController implements Initializable {
 
     Stage stage;

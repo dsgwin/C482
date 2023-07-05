@@ -3,6 +3,12 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 public class Product {
 
     public ObservableList<Part> associatedParts;

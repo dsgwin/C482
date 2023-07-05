@@ -125,7 +125,15 @@ public class AddProductController implements Initializable {
 
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
+
+        String alertText = null;
+
         try {
+
+            alertText = Inventory.formInputCheck(addProductInvTxt.getText(),addProductPriceTxt.getText(),
+                    addProductMinTxt.getText(),addProductMaxTxt.getText());
+
+
             int id = Inventory.getNextProductId();
             String name = addProductNameTxt.getText();
             int stock = Integer.parseInt(addProductInvTxt.getText());
@@ -146,7 +154,7 @@ public class AddProductController implements Initializable {
             Inventory.nextProductId--;
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Adding Product");
-            alert.setContentText("Error adding product:\nPlease enter valid values for each text field");
+            alert.setContentText(alertText);
             alert.showAndWait();
 
         }

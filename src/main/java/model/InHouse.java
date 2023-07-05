@@ -1,5 +1,12 @@
 package model;
 
+
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 public class InHouse extends Part{
 
     public int machineId;
