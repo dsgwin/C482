@@ -15,10 +15,27 @@ import java.io.IOException;
 import java.util.EventObject;
 import java.util.Optional;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
+
+/**
+ * This class is the controller for the "Add Part" menu of the application.
+ */
+
 public class AddPartController {
 
     Stage stage;
     Parent scene;
+
+    /**
+     * Method to return to the main menu screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     
     private void returnToMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
@@ -60,7 +77,12 @@ public class AddPartController {
     @FXML
     private ToggleGroup addPartToggle;
 
-
+    /**
+     * Returns user to the main menu if the cancel button is pressed.
+     * Confirmation prompt will appear on screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
@@ -73,6 +95,11 @@ public class AddPartController {
 
     }
 
+    /**
+     * Creates the part from input form and returns user to the main menu.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
@@ -141,7 +168,10 @@ public class AddPartController {
 
     }
 
-
+    /**
+     * Changes text of Machine ID/ Company Name field based on Radio button selection.
+     * @param event
+     */
     @FXML
     void inHouseSelected(ActionEvent event) {
 
@@ -149,6 +179,10 @@ public class AddPartController {
 
     }
 
+    /**
+     * Changes text of Machine ID/ Company Name field based on Radio button selection.
+     * @param event
+     */
     @FXML
     void outsourcedSelected(ActionEvent event) {
 

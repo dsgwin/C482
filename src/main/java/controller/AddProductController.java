@@ -19,12 +19,27 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
+
+/**
+ * This class is the controller for the "Add Product" menu of the application.
+ */
 public class AddProductController implements Initializable {
 
     Stage stage;
     Parent scene;
     private ObservableList<Part> selectedParts = FXCollections.observableArrayList();
 
+    /**
+     * Method to return to the main menu screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     private void returnToMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
@@ -83,6 +98,11 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField partSearchTxt;
 
+    /**
+     * Adds product to inventory and returns user to main menu screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionAddPartBtn(ActionEvent event) throws IOException {
         Part selectedPart = addPartsTableView.getSelectionModel().getSelectedItem();
@@ -97,6 +117,12 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * Returns user to the main menu if the cancel button is pressed.
+     * Confirmation prompt will appear on screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
@@ -123,6 +149,11 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * Creates the product from input form and returns user to the main menu.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
@@ -161,6 +192,10 @@ public class AddProductController implements Initializable {
 
     }
 
+    /**
+     * Facilitates the search functionality.
+     * @param event
+     */
     @FXML
     void onSearchTextChanged(KeyEvent event) {
 
@@ -177,6 +212,11 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * Initializes scene and loads data into view.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

@@ -19,6 +19,11 @@ public class ModifyPartController {
 
     private int index;
 
+    /**
+     * Method to return to the main menu screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     private void returnToMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
@@ -59,6 +64,12 @@ public class ModifyPartController {
     @FXML
     private ToggleGroup addPartToggle;
 
+    /**
+     * Returns user to the main menu if the cancel button is pressed.
+     * Confirmation prompt will appear on screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionModifyPartCancelBtn(ActionEvent event) throws IOException {
 
@@ -71,6 +82,11 @@ public class ModifyPartController {
 
     }
 
+    /**
+     * Saves changes to the part in input form and returns user to the main menu.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionModifyPartSaveBtn(ActionEvent event) throws IOException {
 
@@ -154,6 +170,10 @@ public class ModifyPartController {
 
     }
 
+    /**
+     * Changes text of Machine ID/ Company Name field based on Radio button selection.
+     * @param event
+     */
     @FXML
     void inHouseSelected(ActionEvent event) {
 
@@ -161,6 +181,10 @@ public class ModifyPartController {
 
     }
 
+    /**
+     * Changes text of Machine ID/ Company Name field based on Radio button selection.
+     * @param event
+     */
     @FXML
     void outsourcedSelected(ActionEvent event) {
 
@@ -168,6 +192,11 @@ public class ModifyPartController {
 
     }
 
+    /**
+     * Sends part fields from controller to another.
+     * @param partIndex product index to be sent.
+     * @param part product object to be sent.
+     */
     public void sendPart(int partIndex, Part part){
         setIndex(partIndex);
         partIdTxt.setText(String.valueOf(part.getId()));

@@ -25,6 +25,10 @@ import java.util.ResourceBundle;
  * dgwin4@wgu.edu
  * 008698673
  */
+
+/**
+ * The controller for the Main Menu screen.
+ */
 public class MainMenuController implements Initializable {
 
     Stage stage;
@@ -66,6 +70,11 @@ public class MainMenuController implements Initializable {
     @FXML
     private TextField productSearchTxt;
 
+    /**
+     * Loads Add Part controller.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionAddPart(ActionEvent event) throws IOException {
 
@@ -76,6 +85,11 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Loads add product controller.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionAddProduct(ActionEvent event) throws IOException {
 
@@ -86,6 +100,10 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Deletes selected part. Confirmation prompt is loaded.
+     * @param event
+     */
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
@@ -114,6 +132,10 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Deletes selected product. Confirmation prompt is loaded.
+     * @param event
+     */
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
 
@@ -138,6 +160,11 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Loads modify part controller.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionModifyPart(ActionEvent event) throws IOException {
 
@@ -172,6 +199,11 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Loads Modify Product controller.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionModifyProduct(ActionEvent event) throws IOException {
 
@@ -205,7 +237,10 @@ public class MainMenuController implements Initializable {
     }
 
 
-
+    /**
+     * Exits application
+     * @param event
+     */
     @FXML
     void onActionExitBtn(ActionEvent event) {
 
@@ -220,6 +255,10 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Facilitates searching parts.
+     * @param event
+     */
     @FXML
     void onInputPartSearchTxtChanged(KeyEvent event) {
 
@@ -239,6 +278,10 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Facilitates searching products.
+     * @param event
+     */
     @FXML
     void onInputProductSearchTxtChanged(KeyEvent event) {
         String productName = productSearchTxt.getText();
@@ -256,6 +299,11 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * Loads initial table data for products and parts.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

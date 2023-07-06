@@ -28,6 +28,11 @@ public class ModifyProductController implements Initializable {
 
     private ObservableList<Part> modifySelectedParts = FXCollections.observableArrayList();
 
+    /**
+     * Method to return to the main menu screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     private void returnToMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/IMS_Application/MainMenu.fxml"));
@@ -86,6 +91,10 @@ public class ModifyProductController implements Initializable {
     @FXML
     private TableColumn<Part, Double> addParts_PartPriceCol;
 
+    /**
+     * Adds part from available parts list to associatd parts list.
+     * @param event
+     */
     @FXML
     void onActionAddPartBtn(ActionEvent event) {
             Part selectedPart = addPartsTableView.getSelectionModel().getSelectedItem();
@@ -101,6 +110,12 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     * Returns user to the main menu if the cancel button is pressed.
+     * Confirmation prompt will appear on screen.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionCancelBtn(ActionEvent event) throws IOException {
 
@@ -113,6 +128,10 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     * Removes associated part from table.
+     * @param event
+     */
     @FXML
     void onActionRemovePartBtn(ActionEvent event) {
 
@@ -139,6 +158,11 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     * Saves the modified product and returns user to the main menu.
+     * @param event
+     * @throws IOException if I/O error occurs.
+     */
     @FXML
     void onActionSaveBtn(ActionEvent event) throws IOException {
 
@@ -179,6 +203,10 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     * Facilitates the search functionality.
+     * @param event
+     */
     @FXML
     void onSearchTextChanged(KeyEvent event) {
 
@@ -195,6 +223,11 @@ public class ModifyProductController implements Initializable {
         }
     }
 
+    /**
+     * Sends product fields from controller to another.
+     * @param productIndex product index to be sent.
+     * @param product product object to be sent.
+     */
     public void sendProduct(int productIndex, Product product) {
 
         setIndex(productIndex);
@@ -210,6 +243,11 @@ public class ModifyProductController implements Initializable {
         selectedPartsTableView.setItems(modifySelectedParts);
     }
 
+    /**
+     * Initializes scene and loads data into view.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -227,6 +265,10 @@ public class ModifyProductController implements Initializable {
 
     }
 
+    /**
+     * Method to set product index.
+     * @param productIndex product index to be set.
+     */
     private void setIndex(int productIndex){
         index = productIndex;
 
