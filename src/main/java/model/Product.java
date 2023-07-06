@@ -9,6 +9,10 @@ import javafx.collections.ObservableList;
  * dgwin4@wgu.edu
  * 008698673
  */
+
+/**
+ * The Product class contains methods and constructors for putting products into inventory.
+ */
 public class Product {
 
     public ObservableList<Part> associatedParts;

@@ -6,6 +6,10 @@ package model;
  * dgwin4@wgu.edu
  * 008698673
  */
+
+/**
+ * The Oursourced part class is a subclass of the Part class.
+ */
 public class Outsourced extends Part{
 
     public String companyName;
