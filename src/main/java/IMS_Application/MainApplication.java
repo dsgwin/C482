@@ -9,7 +9,23 @@ import model.*;
 
 import java.io.IOException;
 
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
+
+/**
+ * This class runs the main application and launches the main menu screen.
+ */
 public class MainApplication extends Application {
+
+    /**
+     * Initializes the Main Menu screen.
+     * @param stage The stage to be loaded.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("MainMenu.fxml"));
@@ -19,12 +35,16 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    /**
+     * The main method loads sample data and launches the application.
+     * @param args
+     */
     public static void main(String[] args) {
 
-        Outsourced part1 = new Outsourced(Inventory.getNextPartId(), "Tire", 50.0, 10, 5, 25, "Schwinn");
+        Outsourced part1 = new Outsourced(Inventory.getNextPartId(), "Tire", 10.0, 10, 5, 25, "Schwinn");
         InHouse part2 = new InHouse(Inventory.getNextPartId(), "Frame", 70.0, 7, 5, 15, 125);
         InHouse part3 = new InHouse(Inventory.getNextPartId(), "Freewheel", 15.0, 7, 5, 15, 123);
-        InHouse part4 = new InHouse(Inventory.getNextPartId(), "Handlebars", 30.0, 9, 5, 20, 500);
+        InHouse part4 = new InHouse(Inventory.getNextPartId(), "Handlebars", 15.0, 9, 5, 20, 500);
         Inventory.addPart(part1);
         Inventory.addPart(part2);
         Inventory.addPart(part3);
