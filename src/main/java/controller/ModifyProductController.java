@@ -18,7 +18,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 
+/**
+ * This class is the controller for the "Modify Product" menu of the application.
+ */
 public class ModifyProductController implements Initializable {
 
     Stage stage;

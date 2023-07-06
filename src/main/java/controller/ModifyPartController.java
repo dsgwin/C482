@@ -11,7 +11,16 @@ import model.*;
 
 import java.io.IOException;
 import java.util.Optional;
+/**
+ * @author
+ * Duncan Gwin
+ * dgwin4@wgu.edu
+ * 008698673
+ */
 
+/**
+ * This class is the controller for the "Modify Part" menu of the application.
+ */
 public class ModifyPartController {
 
     Stage stage;
