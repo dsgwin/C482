@@ -125,31 +125,31 @@ public class AddPartController {
                     }else{
                         companyName = partMachine_CompanyTxt.getText();
                     }
+
+                    if((Inventory.minMaxCheck(min, max) == true) && (Inventory.inventoryCheck(min, max, stock) == true)){
+
+                        if (inHouseRBtn.isSelected()) {
+                            InHouse part = new InHouse(id, name, price, stock, min, max, machineId);
+
+                            Inventory.addPart(part);
+                            returnToMainMenu(event);
+                        }
+                        else {
+                            Outsourced part = new Outsourced(id, name, price, stock, min, max, companyName);
+                            Inventory.addPart(part);
+                            returnToMainMenu(event);
+                        }
+                    }
+                    else {Inventory.nextPartId--;}
                 }
                 catch (Exception e){
+                    Inventory.nextPartId--;
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Adding Part");
-                    alert.setContentText("MachineID Invalid. Must be an Integer");
+                    alert.setContentText("Machine ID Invalid. Must be an Integer");
                     alert.showAndWait();
 
                 }
-
-                if((Inventory.minMaxCheck(min, max) == true) && (Inventory.inventoryCheck(min, max, stock) == true)){
-
-                    if (inHouseRBtn.isSelected()) {
-                        InHouse part = new InHouse(id, name, price, stock, min, max, machineId);
-
-                        Inventory.addPart(part);
-                        returnToMainMenu(event);
-                    }
-                    else {
-                        Outsourced part = new Outsourced(id, name, price, stock, min, max, companyName);
-                        Inventory.addPart(part);
-                        returnToMainMenu(event);
-                    }
-
-                }
-                else {Inventory.nextPartId--;}
 
 
         }

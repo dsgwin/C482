@@ -125,44 +125,44 @@ public class ModifyPartController {
                 }else{
                     companyName = partMachine_CompanyTxt.getText();
                 }
+
+                if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
+
+                    if (inHouseRBtn.isSelected()) {
+                        InHouse updatedPart = new InHouse(id, name, price, stock, min, max, machineId);
+
+                        Inventory.updatePart(index, updatedPart);
+                        for (Product p : Inventory.getAllProducts()) {
+                            for (Part part : p.getAllAssociatedParts()) {
+                                if (updatedPart.getId() == part.getId()) {
+                                    int index = p.getAssociatePartIndex(part);
+                                    p.updateAssociatedPart(index, updatedPart);
+                                }
+                            }
+                        }
+                        returnToMainMenu(event);
+                    } else {
+                        Outsourced updatedPart = new Outsourced(id, name, price, stock, min, max, companyName);
+
+                        Inventory.updatePart(index, updatedPart);
+                        for (Product p : Inventory.getAllProducts()) {
+                            for (Part part : p.getAllAssociatedParts()) {
+                                if (updatedPart.getId() == part.getId()) {
+                                    int index = p.getAssociatePartIndex(part);
+                                    p.updateAssociatedPart(index, updatedPart);
+                                }
+                            }
+                        }
+                        returnToMainMenu(event);
+                    }
+                }
             }
             catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Adding Part");
-                alert.setContentText("MachineID Invalid. Must be an Integer");
+                alert.setContentText("Machine ID Invalid. Must be an Integer");
                 alert.showAndWait();
 
-            }
-
-            if((Inventory.minMaxCheck(min, max)) && (Inventory.inventoryCheck(min, max, stock))) {
-
-                if (inHouseRBtn.isSelected()) {
-                    InHouse updatedPart = new InHouse(id, name, price, stock, min, max, machineId);
-
-                    Inventory.updatePart(index, updatedPart);
-                    for (Product p : Inventory.getAllProducts()) {
-                        for (Part part : p.getAllAssociatedParts()) {
-                            if (updatedPart.getId() == part.getId()) {
-                                int index = p.getAssociatePartIndex(part);
-                                p.updateAssociatedPart(index, updatedPart);
-                            }
-                        }
-                    }
-                    returnToMainMenu(event);
-                } else {
-                    Outsourced updatedPart = new Outsourced(id, name, price, stock, min, max, companyName);
-
-                    Inventory.updatePart(index, updatedPart);
-                    for (Product p : Inventory.getAllProducts()) {
-                        for (Part part : p.getAllAssociatedParts()) {
-                            if (updatedPart.getId() == part.getId()) {
-                                int index = p.getAssociatePartIndex(part);
-                                p.updateAssociatedPart(index, updatedPart);
-                            }
-                        }
-                    }
-                    returnToMainMenu(event);
-                }
             }
 
         }

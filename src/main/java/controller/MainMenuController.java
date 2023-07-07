@@ -102,10 +102,12 @@ public class MainMenuController implements Initializable {
 
     /**
      * Deletes selected part. Confirmation prompt is loaded.
+     * FUTURE ENHANCEMENT: Add ability to update a product that has the associated part to be deleted with a new replacement part.
      * @param event
      */
     @FXML
     void onActionDeletePart(ActionEvent event) {
+
 
         try {
 
@@ -126,10 +128,6 @@ public class MainMenuController implements Initializable {
                 alert.setContentText("Please select a part from the list to delete");
                 alert.showAndWait();
         }
-
-
-
-
     }
 
     /**
@@ -139,22 +137,30 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
 
-        try{
-            Product product = productsTableView.getSelectionModel().getSelectedItem();
-            String productName = product.getName();
+        Product product = productsTableView.getSelectionModel().getSelectedItem();
+        String productName = product.getName();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " + productName + " from the list?");
+        if(product.getAllAssociatedParts().size() == 0) {
+            try {
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                Inventory.deleteProduct(product);
-                productsTableView.refresh();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you would like to delete " + productName + " from the list?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    Inventory.deleteProduct(product);
+                    productsTableView.refresh();
                 }
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("No product selected");
+                alert.setContentText("Please select a product from the list to delete");
+                alert.showAndWait();
+            }
         }
-        catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No product selected");
-            alert.setContentText("Please select a product from the list to delete");
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Removing Product");
+            alert.setContentText("Product has associated parts. Remove associated parts before deleting products." );
             alert.showAndWait();
         }
 
